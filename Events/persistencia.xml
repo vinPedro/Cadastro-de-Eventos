@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gerenciador>
+    <usuario>admin</usuario>
+    <senhaString>admin</senhaString>
+    <eventos>
+        <evento>
+            <dataInicialDate>07/07/2024</dataInicialDate>
+            <dataFinalDate>08/07/2024</dataFinalDate>
+            <descricaoString>teste</descricaoString>
+            <localString>Centro</localString>
+            <nomeString>Teste1</nomeString>
+            <participantes>
+                <idade>20</idade>
+                <nomeString>teste1</nomeString>
+                <senhaString>teste</senhaString>
+                <sexoParticipanteSexo>Masculino</sexoParticipanteSexo>
+            </participantes>
+            <quantParticipantes>10</quantParticipantes>
+        </evento>
+    </eventos>
+    <participantes/>
+</gerenciador>
