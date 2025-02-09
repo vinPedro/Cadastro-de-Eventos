@@ -15,25 +15,30 @@ public class Programa {
 
 		// Participante participante = new Participante("teste", "teste", 20,
 		// Sexo.Masculino);
-		 Participante participante1 = new Participante("teste1", "teste", 20,
-		 Sexo.Masculino, "pedro-lopes.pl@academico.ifpb.edu.br");
+		/*
+		 * Participante participante2 = new Participante("teste2", "teste", 20,
+		 * Sexo.Masculino, "pedro-lopes.pl@academico.ifpb.edu.br");
+		 */
 
 		
-		  Evento evento1 = new Evento("Teste1",
-		  localDateAdapter.unmarshal("07/07/2024"),
-		  localDateAdapter.unmarshal("08/07/2024"), "Centro", 10, "teste");
+			/*
+			 * Evento evento1 = new Evento("Teste1",
+			 * localDateAdapter.unmarshal("07/07/2024"),
+			 * localDateAdapter.unmarshal("08/07/2024"), "Centro", 10, "teste");
+			 */
 		 
 
-		 Gerenciador gerenciador = new Gerenciador("Teste2", "Teste2");
-		 gerenciador.enviarCertificado(participante1, evento1);
-		// Adm adm = new Adm();
-		// Adm adm = Persitencia.carregar();
-		// Gerenciador gerenciador = adm.recuperarAdm(0);
+		 //Gerenciador gerenciador = new Gerenciador("Teste2", "Teste2");
+		 //gerenciador.enviarCertificado(participante1, evento1);
+		 //Adm adm = new Adm();
+		Adm adm = Persitencia.carregar();
+		Gerenciador gerenciador = adm.recuperarAdm(0);
 		// System.out.println(gerenciador.recuperarEvento(0));
 		// gerenciador.addAdm(grt1);
 
 		// evento.addparticipante(participante1);
-		// Evento evento = gerenciador.recuperarEvento(0);
+		Evento evento = gerenciador.recuperarEvento(0);
+		gerenciador.enviarCertificadoParticipantesEvento(evento);
 		// Evento evento1 = gerenciador.recuperarEvento(0);
 		// Participante participante = evento.recuperarParticipante(0);
 		// gerenciador.deleteparticipante(participante);
@@ -51,7 +56,7 @@ public class Programa {
 		// adm.addAdm(gerenciador);
 		// gerenciador.deleteparticipante(gerenciador.recuperarParticipante(0));
 		// gerenciador.deleteEvento(gerenciador.recuperarEvento(0));
-		// Persitencia.persistir(adm);
+		Persitencia.persistir(adm);
 
 		// gerenciador.gerarPDF(participante.getNomeString(), evento.getNomeString());
 

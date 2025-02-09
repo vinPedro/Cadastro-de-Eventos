@@ -11,6 +11,27 @@
                     <descricaoString>teste</descricaoString>
                     <localString>Centro</localString>
                     <nomeString>Teste1</nomeString>
+                    <participantes>
+                        <emailString>pedro-lopes.pl@academico.ifpb.edu.br</emailString>
+                        <idade>20</idade>
+                        <nomeString>teste1</nomeString>
+                        <senhaString>teste</senhaString>
+                        <sexoParticipanteSexo>Masculino</sexoParticipanteSexo>
+                    </participantes>
+                    <participantes>
+                        <emailString>pedro-lopes.pl@academico.ifpb.edu.br</emailString>
+                        <idade>20</idade>
+                        <nomeString>teste1</nomeString>
+                        <senhaString>teste</senhaString>
+                        <sexoParticipanteSexo>Masculino</sexoParticipanteSexo>
+                    </participantes>
+                    <participantes>
+                        <emailString>pedro-lopes.pl@academico.ifpb.edu.br</emailString>
+                        <idade>20</idade>
+                        <nomeString>teste2</nomeString>
+                        <senhaString>teste</senhaString>
+                        <sexoParticipanteSexo>Masculino</sexoParticipanteSexo>
+                    </participantes>
                     <quantParticipantes>10</quantParticipantes>
                 </evento>
                 <evento>

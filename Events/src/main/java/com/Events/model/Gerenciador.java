@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Properties;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -16,6 +15,7 @@ import org.apache.commons.mail.SimpleEmail;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -238,6 +238,19 @@ public class Gerenciador {
             e.printStackTrace();
         }
     }
+	
+	public boolean enviarCertificadoParticipantesEvento(Evento evento) {
+		if(evento == null) {
+			return false;
+		}
+		
+		for (Participante participante : evento.getParticipantes()) {
+			enviarCertificado(participante, evento);
+			
+		}
+		
+		return true;
+	}
 
 	// Getts e Sets
 	public Gerenciador() {
