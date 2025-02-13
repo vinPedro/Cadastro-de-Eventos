@@ -13,6 +13,7 @@ import com.Events.dao.Persistencia;
 import com.Events.model.Adm;
 import com.Events.model.Evento;
 import com.Events.model.Gerenciador;
+import com.Events.model.Participante;
 import com.Events.view.Janela;
 import com.Events.view.JanelaFacade;
 import com.Events.view.usuario.JanelaMenuGerenciador;
@@ -22,11 +23,21 @@ public class VerEvento extends Janela{
 
     private Evento evento;
     private String tela_anterior;
+    private Participante participante;
 
 	public VerEvento(Evento evento, String tela_anterior){
 		
 		this.evento = evento;
         this.tela_anterior = tela_anterior;
+		montarTela();
+
+	}
+
+    public VerEvento(Evento evento, String tela_anterior, Participante participante){
+		
+		this.evento = evento;
+        this.tela_anterior = tela_anterior;
+        this.participante = participante;
 		montarTela();
 
 	}
@@ -46,7 +57,7 @@ public class VerEvento extends Janela{
         if(tela_anterior.equals("MenuGerenciador")){
 			JanelaFacade.criarBotao(this, ouvinteBotaoDeletar(), "Deletar", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 220, 540, 100, 30, new Color(225, 0, 0), new LineBorder(Color.WHITE, 2), null, 0, 0);
 		}else{
-            JanelaFacade.criarBotao(this, ouvinteBotaoDeletar(), "Participar", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 220, 540, 100, 30, new Color(138, 43, 226), new LineBorder(Color.WHITE, 2), null, 0, 0);
+            JanelaFacade.criarBotao(this, ouvinteBotaoParticipar(), "Participar", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 220, 540, 100, 30, new Color(138, 43, 226), new LineBorder(Color.WHITE, 2), null, 0, 0);
         }
 
         setVisible(true);
@@ -64,7 +75,7 @@ public class VerEvento extends Janela{
                     new JanelaMenuGerenciador();
                 }else{
                     dispose();
-                    new JanelaMenuParticipante();
+                    new JanelaMenuParticipante(participante);
                 }
 				
 			}
@@ -102,4 +113,30 @@ public class VerEvento extends Janela{
 			}
 		};
 	}
+
+    public ActionListener ouvinteBotaoParticipar() {
+
+        return new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if(evento.getParticipantes().size() < evento.getQuantParticipantes()){
+                    evento.addparticipante(participante);
+                    Adm adm = Persistencia.carregar();                    
+                    Evento Objevento = adm.recuperarEvento(evento.getNomeString());
+                    Objevento.addparticipante(participante);
+
+                    Persistencia.persistir(adm);
+                    Gerenciador gerenciador = adm.getGerenciadores().get(0);
+                    gerenciador.enviarConfirmacaoEvento(participante, Objevento);
+                    JOptionPane.showMessageDialog(null, "Participacao confirmada");
+                    dispose();
+                    new JanelaMenuParticipante(participante);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Evento lotado");
+                }
+            }
+        };
+    }
 }
