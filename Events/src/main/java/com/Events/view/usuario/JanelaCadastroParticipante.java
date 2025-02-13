@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
@@ -83,12 +84,23 @@ public class JanelaCadastroParticipante extends Janela{
                 Adm adm = Persistencia.carregar();
 
                 Gerenciador gerenciador = adm.getGerenciadores().get(0);
-                gerenciador.addparticipante(participante);
+				Participante participante_cadastrado = adm.recuperarParticipante(campoEmail.getText());
 
-				Persistencia.persistir(adm);
+				if(participante_cadastrado == null){
+					
+					gerenciador.addparticipante(participante);
 
-				dispose();
-				new JanelaLogin();
+					Persistencia.persistir(adm);
+					dispose();
+
+					JOptionPane.showMessageDialog(null, "Preparando o seu cadastro...");
+					gerenciador.enviarConfirmacaoCadastro(participante);
+					JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+
+					new JanelaLogin();
+				}else{
+					JOptionPane.showMessageDialog(null, "Email já cadastrado");
+				}
 					
 			}
 			
