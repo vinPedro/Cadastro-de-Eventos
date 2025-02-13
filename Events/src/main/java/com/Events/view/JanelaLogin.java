@@ -12,8 +12,11 @@ import java.awt.Font;
 
 import com.Events.dao.Persistencia;
 import com.Events.model.Adm;
+import com.Events.model.Gerenciador;
+import com.Events.model.Participante;
 import com.Events.view.usuario.JanelaCadastroParticipante;
 import com.Events.view.usuario.JanelaMenuGerenciador;
+import com.Events.view.usuario.JanelaMenuParticipante;
 
 public class JanelaLogin extends Janela{
 	private JTextField campoEmail;
@@ -74,7 +77,9 @@ public class JanelaLogin extends Janela{
 					new JanelaMenuGerenciador();
 					
 				}else if(isParticipante){
-					System.out.println("Login participante");
+					Participante participante = adm.recuperarParticipante(campoEmail.getText());
+					dispose();
+					new JanelaMenuParticipante(participante);
 
 				} else{
 					JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!", "Tente novamente", JOptionPane.DEFAULT_OPTION);
