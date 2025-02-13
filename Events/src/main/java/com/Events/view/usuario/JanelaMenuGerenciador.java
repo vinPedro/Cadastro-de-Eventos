@@ -6,11 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import com.Events.view.JanelaFacade;
 import com.Events.view.JanelaLogin;
 import com.Events.view.evento.JanelaCadastrarEvento;
+import com.Events.view.evento.VerEvento;
+import com.Events.dao.Persistencia;
+import com.Events.model.Adm;
+import com.Events.model.Evento;
+import com.Events.model.Gerenciador;
 import com.Events.view.Janela;
 
 public class JanelaMenuGerenciador extends Janela{
@@ -42,6 +48,18 @@ public class JanelaMenuGerenciador extends Janela{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+
+                Adm adm = Persistencia.carregar();
+                Gerenciador gerenciador = adm.getGerenciadores().get(0);
+
+                Evento resposta = (Evento)JOptionPane.showInputDialog(null, "Test", "Eventos", JOptionPane.DEFAULT_OPTION, null, gerenciador.getEventos().toArray(), "Evento 1");
+
+                if(resposta != null) {
+                    new VerEvento(resposta, "MenuGerenciador");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Nenhum evento selecionado");
+                    new JanelaMenuGerenciador();
+                }
 				
 			}
 		};
