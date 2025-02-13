@@ -279,4 +279,16 @@ public class Gerenciador {
 		return participantes;
 	}
 
+	public boolean deletarEvento(Evento evento) {
+		if (evento == null) {
+			return false;
+		}
+
+		else if (eventos.remove(evento) == true) {
+			return true;
+		}
+
+		return false;
+	}
+
 }
