@@ -9,7 +9,7 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 
-public class Persitencia {
+public class Persistencia {
 
 	private static final String XML_FILE_STRING = "persistencia.xml";
 	
@@ -33,11 +33,7 @@ public class Persitencia {
 		try {
 			JAXBContext context = JAXBContext.newInstance(Adm.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			return (Adm)
-			
-			unmarshaller.unmarshal(new  File(XML_FILE_STRING));
-			
-			
+			return (Adm) unmarshaller.unmarshal(new File(XML_FILE_STRING));			
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			return null;
