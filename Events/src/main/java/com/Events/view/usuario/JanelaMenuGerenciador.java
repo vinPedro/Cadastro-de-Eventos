@@ -52,14 +52,26 @@ public class JanelaMenuGerenciador extends Janela{
                 Adm adm = Persistencia.carregar();
                 Gerenciador gerenciador = adm.getGerenciadores().get(0);
 
-                Evento resposta = (Evento)JOptionPane.showInputDialog(null, "Test", "Eventos", JOptionPane.DEFAULT_OPTION, null, gerenciador.getEventos().toArray(), "Evento 1");
+                Evento[] eventos = new Evento[gerenciador.getEventos().size()];
 
-                if(resposta != null) {
-                    new VerEvento(resposta, "MenuGerenciador");
-                }else{
-                    JOptionPane.showMessageDialog(null, "Nenhum evento selecionado");
-                    new JanelaMenuGerenciador();
+                for(int i = 0; i < gerenciador.getEventos().size(); i++){
+                    eventos[i] = gerenciador.getEventos().get(i);
                 }
+
+                if(eventos.length == 0){
+                    JOptionPane.showMessageDialog(null, "Nenhum evento cadastrado");
+                    new JanelaMenuGerenciador();
+                }else{
+                    Evento resposta = (Evento)JOptionPane.showInputDialog(null, "Test", "Eventos", JOptionPane.DEFAULT_OPTION, null, eventos, "Evento 1");
+    
+                    if(resposta != null) {
+                        new VerEvento(resposta, "MenuGerenciador");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Nenhum evento selecionado");
+                        new JanelaMenuGerenciador();
+                    }
+                }
+
 				
 			}
 		};
