@@ -105,4 +105,30 @@ public class Adm {
 
 	}
 
+	public Participante recuperarParticipante(String email) {
+
+		for (Gerenciador gerenciador : gerenciadores) {
+			for (Participante participante : gerenciador.getParticipantes()) {
+				if (participante.getEmailString().equals(email)) {
+					return participante;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	public Evento recuperarEvento(String nome) {
+
+		for (Gerenciador gerenciador : gerenciadores) {
+			for (Evento evento : gerenciador.getEventos()) {
+				if (evento.getNomeString().equals(nome)) {
+					return evento;
+				}
+			}
+		}
+
+		return null;
+	}
+
 }
