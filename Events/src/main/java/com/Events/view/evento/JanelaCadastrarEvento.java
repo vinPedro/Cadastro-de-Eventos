@@ -95,7 +95,7 @@ public class JanelaCadastrarEvento extends Janela{
 				Persistencia.persistir(adm);
 
 				dispose();
-				new JanelaLogin();
+				new JanelaMenuGerenciador();
 					
 			}
 			
