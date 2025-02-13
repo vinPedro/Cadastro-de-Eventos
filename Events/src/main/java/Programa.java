@@ -1,12 +1,28 @@
 
+import javax.swing.JOptionPane;
+
 import com.Events.dao.Persistencia;
 import com.Events.model.Adm;
+import com.Events.model.Evento;
+import com.Events.model.Gerenciador;
+import com.Events.model.Participante;
+import com.Events.model.Sexo;
 import com.Events.view.JanelaLogin;
+import com.Events.view.evento.JanelaCadastrarEvento;
 import com.Events.view.usuario.JanelaCadastroGerenciador;
+import com.Events.view.usuario.JanelaMenuGerenciador;
+import com.Events.view.usuario.JanelaMenuParticipante;
 
 public class Programa {
 
 	public static void main(String[] args) throws Exception {
+
+		// Enviar Certificado
+		// Participante participante = new Participante("Jeff", "teste", 20,Sexo.Masculino, "jeffersondanilo2517@gmail.com");
+		// Evento evento1 = new Evento("Teste1", null, null, "Centro", 10, "teste");
+		// Gerenciador gerenciador = new Gerenciador("Teste2", "Teste2");
+		// gerenciador.enviarCertificado(participante, evento1);
+
 
 		Adm adm = new Adm();
 		try{
@@ -17,7 +33,13 @@ public class Programa {
 		}
 
 		if(adm.getGerenciadores().size() > 0){
+
+			
 			new JanelaLogin();
+			// new JanelaCadastrarEvento();
+			// new JanelaMenuGerenciador();
+			// new JanelaMenuParticipante(null);
+			
 		}else{
 			new JanelaCadastroGerenciador();
 		}
@@ -25,23 +47,18 @@ public class Programa {
 		// Exemplos de uso
 		// LocalDateAdapter localDateAdapter = new LocalDateAdapter();
 
-		// Participante participante = new Participante("teste", "teste", 20,
-		// Sexo.Masculino);
-		/*
-		 * Participante participante2 = new Participante("teste2", "teste", 20,
-		 * Sexo.Masculino, "pedro-lopes.pl@academico.ifpb.edu.br");
-		 */
+		// Participante participante = new Participante("Jeff", "teste", 20,Sexo.Masculino, "jeffersondanilo2517@gmail.com");
+		// /*
+		//  * Participante participante2 = new Participante("teste2", "teste", 20,
+		//  * Sexo.Masculino, "pedro-lopes.pl@academico.ifpb.edu.br");
+		//  */
 
 		
-			/*
-			 * Evento evento1 = new Evento("Teste1",
-			 * localDateAdapter.unmarshal("07/07/2024"),
-			 * localDateAdapter.unmarshal("08/07/2024"), "Centro", 10, "teste");
-			 */
-		 
+		// Evento evento1 = new Evento("Teste1", null, null, "Centro", 10, "teste");
+					 
 
-		 //Gerenciador gerenciador = new Gerenciador("Teste2", "Teste2");
-		 //gerenciador.enviarCertificado(participante1, evento1);
+		//  Gerenciador gerenciador = new Gerenciador("Teste2", "Teste2");
+		//  gerenciador.enviarCertificado(participante, evento1);
 		//  Adm adm = new Adm();
 		// Adm adm = Persitencia.carregar();
 		// Gerenciador gerenciador = adm.recuperarAdm(0);
