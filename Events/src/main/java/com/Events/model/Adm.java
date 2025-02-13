@@ -77,4 +77,32 @@ public class Adm {
 		this.gerenciadores = gerenciadores;
 	}
 
+	public boolean isAdmin(String login, String senha) {
+		
+		for (Gerenciador gerenciador : gerenciadores) {
+			if(gerenciador.getusuarioG().equals(login) && gerenciador.getSenhaStringG().equals(senha)) {
+				return true;
+			}
+		
+		}
+
+		return false;
+
+	}
+
+	public boolean isParticipante(String login, String senha) {
+		
+		for (Gerenciador gerenciador : gerenciadores) {
+			for (Participante participante : gerenciador.getParticipantes()) {
+				if(participante.getEmailString().equals(login) && participante.getSenhaString().equals(senha)) {
+					return true;
+				}
+			}
+		
+		}
+
+		return false;
+
+	}
+
 }
