@@ -5,11 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
 
+import com.Events.dao.Persistencia;
+import com.Events.model.Adm;
 import com.Events.view.usuario.JanelaCadastroParticipante;
+import com.Events.view.usuario.JanelaMenuGerenciador;
 
 public class JanelaLogin extends Janela{
 	private JTextField campoEmail;
@@ -57,33 +61,24 @@ public class JanelaLogin extends Janela{
 		return new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				
-				// if(LoginController.login(campoEmail.getText(), campoSenha.getText())){
+
+				Adm adm = Persistencia.carregar();
+
+				boolean isAdmin = adm.isAdmin(campoEmail.getText(), campoSenha.getText());
+				boolean isParticipante = adm.isParticipante(campoEmail.getText(), campoSenha.getText());
+
+				if(isAdmin) {
 					
-				// 	dispose();
+					System.out.println("Login admin");
+					dispose();
+					new JanelaMenuGerenciador();
+					
+				}else if(isParticipante){
+					System.out.println("Login participante");
 
-				// 	User user = Auth.getLoggeduser();
-
-				// 	if(user.isAdmin()) {
-
-				// 		LojaController lojaController = new LojaController();
-
-				// 		Loja loja = lojaController.buscarLojaPorAdminId(user.getId());
-
-				// 		if(loja == null) {
-				// 			new JanelaCadastrarLoja(user.getId());
-				// 		}else{
-				// 			new JanelaMenuAdministrador();
-				// 		}
-
-				// 	}
-				// 	else {
-				// 		new JanelaMenuCliente();
-				// 	}
-
-				// }else{
-				// 	JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!", "Tente novamente", JOptionPane.DEFAULT_OPTION);
-				// }
+				} else{
+					JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!", "Tente novamente", JOptionPane.DEFAULT_OPTION);
+				}
 				
 			}
 		};
@@ -100,6 +95,5 @@ public class JanelaLogin extends Janela{
 			}
 		};
 	}
-
 	
 }
