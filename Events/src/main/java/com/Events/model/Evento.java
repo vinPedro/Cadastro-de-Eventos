@@ -1,7 +1,11 @@
 package com.Events.model;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import javax.swing.text.DateFormatter;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -10,23 +14,23 @@ public class Evento {
 	private String nomeString;
 
 	@XmlJavaTypeAdapter(LocalDateAdapter.class)
-	private LocalDate dataInicialDate;
+	private LocalDate dataInicial;
 
 	@XmlJavaTypeAdapter(LocalDateAdapter.class)
-	private LocalDate dataFinalDate;
+	private LocalDate dataFinal;
 
 	private String localString;
 	private int quantParticipantes;
 	private ArrayList<Participante> participantes = new ArrayList<Participante>();
 	private String descricaoString;
 
-	public Evento(String nomeString, LocalDate dataInicialDate, LocalDate dataFinalDate, String localString,
+	public Evento(String nomeString, LocalDate dataInicial, LocalDate dataFinal, String localString,
 			int quantParticipantes, String descricaoString) {
 
 		super();
 		this.nomeString = nomeString;
-		this.dataInicialDate = dataInicialDate;
-		this.dataFinalDate = dataFinalDate;
+		this.dataInicial = dataInicial;
+		this.dataFinal = dataFinal;
 		this.localString = localString;
 		this.quantParticipantes = quantParticipantes;
 		this.descricaoString = descricaoString;
@@ -96,12 +100,31 @@ public class Evento {
 		this.nomeString = nomeString;
 	}
 
-	public void setDataInicialDate(LocalDate dataInicialDate) {
-		this.dataInicialDate = dataInicialDate;
+	public void setDataInicialDate(LocalDate dataInicial) {
+		this.dataInicial = dataInicial;
 	}
 
-	public void setDataFinalDate(LocalDate dataFinalDate) {
-		this.dataFinalDate = dataFinalDate;
+	public String getDataInicialDate() {
+		if(this.dataInicial == null) {
+			return "";
+		}
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return this.dataInicial.format(formatter);
+	}
+
+	public void setDataFinalDate(LocalDate dataFinal) {
+		this.dataFinal = dataFinal;
+	}
+
+	public String getDataFinalDate() {
+		if(this.dataFinal == null) {
+			return "";
+		}
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		return this.dataFinal.format(formatter);
 	}
 
 	public String getLocalString() {
@@ -134,6 +157,10 @@ public class Evento {
 
 	public void setDescricaoString(String descricaoString) {
 		this.descricaoString = descricaoString;
+	}
+
+	public String toString(){
+		return nomeString;
 	}
 
 }
