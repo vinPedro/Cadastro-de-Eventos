@@ -15,7 +15,6 @@ import org.apache.commons.mail.SimpleEmail;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import jakarta.xml.bind.annotation.XmlAccessType;

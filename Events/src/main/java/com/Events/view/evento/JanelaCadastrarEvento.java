@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -16,7 +15,6 @@ import com.Events.dao.Persistencia;
 import com.Events.model.Adm;
 import com.Events.model.Evento;
 import com.Events.model.Gerenciador;
-import com.Events.model.Sexo;
 import com.Events.view.Janela;
 import com.Events.view.JanelaFacade;
 import com.Events.view.JanelaLogin;
