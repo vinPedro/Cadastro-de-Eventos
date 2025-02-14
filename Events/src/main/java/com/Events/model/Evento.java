@@ -69,13 +69,17 @@ public class Evento {
 	// remove um usuário da lista de participantes do evento pelo passando o proprio
 	// participante recuperado da lista de inscricoes
 	public boolean excluirEscricaoParticipante(Participante participante) {
-		if (participante.equals(null)) {
+		
+		if (participante == null) {
 			return false;
 		}
-
-		else if (participantes.remove(participante) == true) {
-			return true;
-		}
+		
+		for (Participante participante2 : participantes) {
+			if (participante.getEmailString().equals(participante2.getEmailString())) {
+				participantes.remove(participante2);
+				return true;
+			}
+		}		
 
 		return false;
 	}

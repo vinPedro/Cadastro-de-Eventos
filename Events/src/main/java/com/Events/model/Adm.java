@@ -131,4 +131,20 @@ public class Adm {
 		return null;
 	}
 
+	public ArrayList<Evento> getParticipanteEventos(String email) {
+		ArrayList<Evento> eventos = new ArrayList<Evento>();
+
+		for (Gerenciador gerenciador : gerenciadores) {
+			for (Evento evento : gerenciador.getEventos()) {
+				for (Participante participante : evento.getParticipantes()) {
+					if (participante.getEmailString().equals(email)) {
+						eventos.add(evento);
+					}
+				}
+			}
+		}
+
+		return eventos;
+	}
+
 }

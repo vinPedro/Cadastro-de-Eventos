@@ -72,7 +72,7 @@ public class JanelaMenuParticipante extends Janela{
                     Evento resposta = (Evento)JOptionPane.showInputDialog(null, "Test", "Eventos", JOptionPane.DEFAULT_OPTION, null, eventos, "Evento 1");
     
                     if(resposta != null) {
-                        new VerEvento(resposta, "MenuParticipante", participante);
+                        new VerEvento(resposta, "MenuParticipante", participante, false);
                     }else{
                         JOptionPane.showMessageDialog(null, "Nenhum evento selecionado");
                         new JanelaMenuParticipante(participante);
@@ -102,7 +102,7 @@ public class JanelaMenuParticipante extends Janela{
                     Evento resposta = (Evento)JOptionPane.showInputDialog(null, "Test", "Eventos", JOptionPane.DEFAULT_OPTION, null, eventos.toArray(), "Evento 1");
     
                     if(resposta != null) {
-                        new VerEvento(resposta, "MenuParticipante", participante);
+                        new VerEvento(resposta, "MenuParticipante", participante, true);
                     }else{
                         JOptionPane.showMessageDialog(null, "Nenhum evento selecionado");
                         new JanelaMenuParticipante(participante);

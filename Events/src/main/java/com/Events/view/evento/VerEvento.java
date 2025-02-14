@@ -24,6 +24,8 @@ public class VerEvento extends Janela{
     private Evento evento;
     private String tela_anterior;
     private Participante participante;
+    private boolean participante_inscrito;
+
 
 	public VerEvento(Evento evento, String tela_anterior){
 		
@@ -33,11 +35,12 @@ public class VerEvento extends Janela{
 
 	}
 
-    public VerEvento(Evento evento, String tela_anterior, Participante participante){
+    public VerEvento(Evento evento, String tela_anterior, Participante participante, boolean participante_inscrito){
 		
 		this.evento = evento;
         this.tela_anterior = tela_anterior;
         this.participante = participante;
+        this.participante_inscrito = participante_inscrito;
 		montarTela();
 
 	}
@@ -58,7 +61,11 @@ public class VerEvento extends Janela{
 			JanelaFacade.criarBotao(this, ouvinteBotaoDeletar(), "Deletar", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 150, 540, 100, 30, new Color(225, 0, 0), new LineBorder(Color.WHITE, 2), null, 0, 0);
             JanelaFacade.criarBotao(this, ouvinteBotaoEnviarCertificados(), "Enviar Certificados", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 300, 540, 150, 30, new Color(100, 200, 50), new LineBorder(Color.WHITE, 2), null, 0, 0);
 		}else{
-            JanelaFacade.criarBotao(this, ouvinteBotaoParticipar(), "Participar", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 220, 540, 100, 30, new Color(138, 43, 226), new LineBorder(Color.WHITE, 2), null, 0, 0);
+            if(!participante_inscrito){
+                JanelaFacade.criarBotao(this, ouvinteBotaoParticipar(), "Participar", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 220, 540, 100, 30, new Color(138, 43, 226), new LineBorder(Color.WHITE, 2), null, 0, 0);
+            }else{
+                JanelaFacade.criarBotao(this, ouvinteBotaoDesinscrever(), "Desinscrever", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 220, 540, 100, 30, new Color(138, 43, 226), new LineBorder(Color.WHITE, 2), null, 0, 0);
+            }
         }
 
         setVisible(true);
@@ -153,6 +160,30 @@ public class VerEvento extends Janela{
                 }else{
                     JOptionPane.showMessageDialog(null, "Evento lotado");
                 }
+            }
+        };
+    }
+
+    public ActionListener ouvinteBotaoDesinscrever() {
+
+        return new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                evento.excluirEscricaoParticipante(participante);
+                Adm adm = Persistencia.carregar();                    
+                Evento Objevento = adm.recuperarEvento(evento.getNomeString());
+                Objevento.excluirEscricaoParticipante(participante);
+
+                for(Participante p : Objevento.getParticipantes()){
+                    System.out.println(p.getNomeString());
+                }
+
+                Persistencia.persistir(adm);
+                JOptionPane.showMessageDialog(null, "Desinscricao realizada");
+                dispose();
+                new JanelaMenuParticipante(participante);
             }
         };
     }
