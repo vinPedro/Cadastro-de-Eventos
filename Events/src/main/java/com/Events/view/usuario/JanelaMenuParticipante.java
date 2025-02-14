@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,7 +32,7 @@ public class JanelaMenuParticipante extends Janela{
 		JanelaFacade.criarTexto(this, 0, 40, 550, 30, "Menu do Participante", new java.awt.Font("Arial", java.awt.Font.BOLD, 20), JLabel.CENTER, Color.WHITE);
 		
 		JanelaFacade.criarBotao(this, ouvinteVerEventos(), "Ver Eventos", new Font("TimesRoman", Font.PLAIN, 17), Color.WHITE, 190, 220, 170, 30, new Color(174, 55, 255), new LineBorder(Color.WHITE, 2), null, 0, 0);
-		JanelaFacade.criarBotao(this, ouvinteVerEventos(), "Ver Eventos", new Font("TimesRoman", Font.PLAIN, 17), Color.WHITE, 190, 300, 170, 30, new Color(174, 55, 255), new LineBorder(Color.WHITE, 2), null, 0, 0);
+		JanelaFacade.criarBotao(this, ouvinteMeusEventos(), "Meus Eventos", new Font("TimesRoman", Font.PLAIN, 17), Color.WHITE, 190, 300, 170, 30, new Color(174, 55, 255), new LineBorder(Color.WHITE, 2), null, 0, 0);
 		JanelaFacade.criarBotao(this, ouvinteBotaoLogout(), "Logout", new Font("TimesRoman", Font.PLAIN, 17), Color.WHITE, 190, 460, 170, 30, new Color(174, 55, 255), new LineBorder(Color.WHITE, 2), null, 0, 0);
 		
 		setVisible(true);
@@ -69,6 +70,36 @@ public class JanelaMenuParticipante extends Janela{
                     new JanelaMenuParticipante(participante);
                 }else{
                     Evento resposta = (Evento)JOptionPane.showInputDialog(null, "Test", "Eventos", JOptionPane.DEFAULT_OPTION, null, eventos, "Evento 1");
+    
+                    if(resposta != null) {
+                        new VerEvento(resposta, "MenuParticipante", participante);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Nenhum evento selecionado");
+                        new JanelaMenuParticipante(participante);
+                    }
+                }
+
+				
+			}
+		};
+	}	
+
+	public ActionListener ouvinteMeusEventos() {
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+
+                Adm adm = Persistencia.carregar();
+
+                ArrayList<Evento> eventos = adm.getParticipanteEventos(participante.getEmailString());
+
+                if(eventos.size() == 0){
+                    JOptionPane.showMessageDialog(null, "Você não está em nenhum evento.");
+                    new JanelaMenuParticipante(participante);
+                }else{
+                    Evento resposta = (Evento)JOptionPane.showInputDialog(null, "Test", "Eventos", JOptionPane.DEFAULT_OPTION, null, eventos.toArray(), "Evento 1");
     
                     if(resposta != null) {
                         new VerEvento(resposta, "MenuParticipante", participante);
