@@ -55,7 +55,8 @@ public class VerEvento extends Janela{
         
         JanelaFacade.criarBotao(this, ouvinteBotaoVoltar(), "Voltar", new java.awt.Font("Arial", java.awt.Font.TRUETYPE_FONT, 13), Color.WHITE, 40, 43, 50, 25, new Color(35,35, 142), new LineBorder(Color.WHITE, 2), null, 0, 0);	
         if(tela_anterior.equals("MenuGerenciador")){
-			JanelaFacade.criarBotao(this, ouvinteBotaoDeletar(), "Deletar", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 220, 540, 100, 30, new Color(225, 0, 0), new LineBorder(Color.WHITE, 2), null, 0, 0);
+			JanelaFacade.criarBotao(this, ouvinteBotaoDeletar(), "Deletar", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 150, 540, 100, 30, new Color(225, 0, 0), new LineBorder(Color.WHITE, 2), null, 0, 0);
+            JanelaFacade.criarBotao(this, ouvinteBotaoEnviarCertificados(), "Enviar Certificados", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 300, 540, 150, 30, new Color(100, 200, 50), new LineBorder(Color.WHITE, 2), null, 0, 0);
 		}else{
             JanelaFacade.criarBotao(this, ouvinteBotaoParticipar(), "Participar", new Font("Fonte", Font.BOLD, 13), Color.WHITE, 220, 540, 100, 30, new Color(138, 43, 226), new LineBorder(Color.WHITE, 2), null, 0, 0);
         }
@@ -113,6 +114,22 @@ public class VerEvento extends Janela{
 			}
 		};
 	}
+
+    public ActionListener ouvinteBotaoEnviarCertificados() {
+
+        return new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                Adm adm = Persistencia.carregar();
+                Gerenciador gerenciador = adm.getGerenciadores().get(0);
+                JOptionPane.showMessageDialog(null, "Enviando certificados...");
+                gerenciador.enviarCertificadoParticipantesEvento(evento);
+                JOptionPane.showMessageDialog(null, "Certificados enviados");
+            }
+        };
+    }
 
     public ActionListener ouvinteBotaoParticipar() {
 
