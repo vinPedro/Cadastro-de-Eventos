@@ -46,7 +46,9 @@ public class JanelaLogin extends Janela{
 		JanelaFacade.criarTexto(this, 120, 320, 550, 30, "Senha:", new Font("TimesRoman", Font.PLAIN, 17), JLabel.LEFT, Color.BLACK);
 		campoSenha = JanelaFacade.criarCampoTextoComum(this, 120, 360, 315, 25, new LineBorder(new Color(174, 55, 255), 2));		
 		
-		JanelaFacade.criarBotao(this, ouvinteBotaoLogin(), "Login", new Font("TimesRoman", Font.PLAIN, 17), Color.WHITE, 200, 430, 170, 30, new Color(174, 55, 255), new LineBorder(new Color(174, 55, 255), 2), null, 0, 0);
+		JanelaFacade.criarBotao(this, ouvinteBotaoEsqueceuSenha(), "Esqueceu a senha?", new java.awt.Font("Arial", java.awt.Font.ITALIC, 13), new Color(174, 55, 255), 315, 400, 120, 25, Color.WHITE, new LineBorder(Color.WHITE, 1), null, 0, 0);
+		
+		JanelaFacade.criarBotao(this, ouvinteBotaoLogin(), "Login", new Font("TimesRoman", Font.PLAIN, 17), Color.WHITE, 200, 450, 170, 30, new Color(174, 55, 255), new LineBorder(new Color(174, 55, 255), 2), null, 0, 0);
 		
 		JanelaFacade.criarTexto(this, 170, 500, 275, 25, "Ainda não tem uma conta?", new java.awt.Font("Arial", java.awt.Font.PLAIN, 13), JLabel.LEFT, Color.BLACK);
 		
@@ -96,6 +98,17 @@ public class JanelaLogin extends Janela{
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				new JanelaCadastroParticipante();
+				
+			}
+		};
+	}
+
+	public ActionListener ouvinteBotaoEsqueceuSenha() {
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Entre em contato com o suporte para recuperar sua senha!", "Esqueceu a senha?", JOptionPane.DEFAULT_OPTION);
 				
 			}
 		};
