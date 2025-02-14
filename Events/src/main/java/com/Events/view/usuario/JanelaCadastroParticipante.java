@@ -78,28 +78,51 @@ public class JanelaCadastroParticipante extends Janela{
 		return new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
-				
-				participante = new Participante(campoNome.getText(), campoSenha.getText(), Integer.parseInt(campoIdade.getText()), Sexo.valueOf(campoSexo.getText()), campoEmail.getText());
 
-                Adm adm = Persistencia.carregar();
+				String erro = null;
 
-                Gerenciador gerenciador = adm.getGerenciadores().get(0);
-				Participante participante_cadastrado = adm.recuperarParticipante(campoEmail.getText());
+				if(campoEmail.getText().equals("") || campoNome.getText().equals("") || campoIdade.getText().equals("") || campoSenha.getText().equals("") || campoSexo.getText().equals("")){
+					erro = "Preencha todos os campos";
+				}else if(!campoEmail.getText().matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+					erro = "Email inválido";
+				}else if(!campoIdade.getText().matches("[0-9]+")){
+					erro = "Idade deve ser um número";
+				}else if(campoSenha.getText().length() < 6){
+					erro = "Senha deve ter no mínimo 6 caracteres";
+				}else if(!campoSexo.getText().equals("Masculino") && !campoSexo.getText().equals("Feminino")){
+					erro = "Sexo deve ser Masculino ou Feminino";
+				} 
 
-				if(participante_cadastrado == null){
+				if(erro != null){
+					JOptionPane.showMessageDialog(null, erro);
+				}else{					
 					
-					gerenciador.addparticipante(participante);
+					Adm adm = Persistencia.carregar();
+						
+					Gerenciador gerenciador = adm.getGerenciadores().get(0);
+					Participante participante_cadastrado = adm.recuperarParticipante(campoEmail.getText());
 
-					Persistencia.persistir(adm);
-					dispose();
+					if(participante_cadastrado != null){
+						JOptionPane.showMessageDialog(null, "Email já cadastrado");
+					}else{
 
-					JOptionPane.showMessageDialog(null, "Preparando o seu cadastro...");
-					gerenciador.enviarConfirmacaoCadastro(participante);
-					JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+						participante = new Participante(campoNome.getText(), campoSenha.getText(), Integer.parseInt(campoIdade.getText()), Sexo.valueOf(campoSexo.getText()), campoEmail.getText());
+	
+						if(participante_cadastrado == null){
+							
+							gerenciador.addparticipante(participante);
+	
+							Persistencia.persistir(adm);
+							dispose();
+	
+							JOptionPane.showMessageDialog(null, "Preparando o seu cadastro...");
+							gerenciador.enviarConfirmacaoCadastro(participante);
+							JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+	
+							new JanelaLogin();
+						}
+					}					
 
-					new JanelaLogin();
-				}else{
-					JOptionPane.showMessageDialog(null, "Email já cadastrado");
 				}
 					
 			}

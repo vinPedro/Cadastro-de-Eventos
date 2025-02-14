@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import com.Events.dao.Persistencia;
@@ -59,7 +60,26 @@ public class JanelaCadastroGerenciador extends Janela{
 		return new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
+
+				String erro = null;
+
+				if(campoEmail.getText().isEmpty()) {
+					erro = "O campo E-mail não pode ser vazio";
+				}
+				else if(campoSenha.getText().isEmpty()) {
+					erro = "O campo Senha não pode ser vazio";
+				}
+				else if(!campoEmail.getText().matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+					erro = "E-mail inválido";
+				}
+				else if(campoSenha.getText().length() < 6) {
+					erro = "A senha deve ter no mínimo 6 caracteres";
+				}
 				
+				if(erro != null) {
+					JOptionPane.showMessageDialog(null, erro, "Erro", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				gerenciador = new Gerenciador(campoEmail.getText(), campoSenha.getText());
 
                 Adm adm = new Adm();
